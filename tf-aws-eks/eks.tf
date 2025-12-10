@@ -2,16 +2,15 @@
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "21.0.0"
+  version = "~> 19.0"
 
   name    = "my-eks-cluster"
-  kubernetes_version = "1.29"
+  cluster_version = "1.30"
+  cluster_endpoint_public_access  = true
 
-  endpoint_public_access  = true
-
-  vpc_id                   = module.vpc.vpc_id
-  subnet_ids               = module.vpc.private_subnets
-
+  vpc_id = module.vpc.vpc_id
+  
+  subnet_ids = module.vpc.private_subnets
 
   eks_managed_node_groups = {
     nodes = {
