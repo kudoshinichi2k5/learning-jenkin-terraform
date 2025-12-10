@@ -19,8 +19,15 @@ module "eks" {
       max_size     = 3
       desired_size = 2
 
-      instance_types = ["t2.small"]
+      instance_types = ["t3.medium"]
       capacity_type  = "SPOT"
+
+      iam_role_additional_policies = {
+        AmazonEKSWorkerNodePolicy          = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+        AmazonEKS_CNI_Policy               = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+        AmazonEC2ContainerRegistryReadOnly = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+        AmazonSSMManagedInstanceCore       = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+      }
     }
   }
 
