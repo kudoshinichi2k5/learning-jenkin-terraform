@@ -22,6 +22,18 @@ module "eks" {
     }
   }
 
+  manage_aws_auth_configmap = true
+
+  # Danh sách user được phép truy cập Cluster
+  aws_auth_users = [
+    {
+      # Thay đúng ARN user của bạn (tôi lấy từ log cũ của bạn)
+      userarn  = "arn:aws:iam::306989527393:user/kienle" 
+      username = "kienle"
+      groups   = ["system:masters"] # Cấp quyền Admin cao nhất
+    }
+  ]
+
   tags = {
     Environment = "dev"
     Terraform   = "true"

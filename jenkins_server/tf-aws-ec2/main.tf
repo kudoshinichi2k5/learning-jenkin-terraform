@@ -4,6 +4,7 @@
 # Creating a VPC
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  version = "3.19.0"
 
   name = var.vpc_name
   cidr = var.vpc_cidr
@@ -88,7 +89,8 @@ module "sg" {
 # EC2
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
-
+  version = "4.3.0"
+  
   name = var.jenkins_ec2_instance
 
   instance_type               = var.instance_type

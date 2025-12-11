@@ -41,7 +41,6 @@ pipeline{
                     dir('tf-aws-eks'){
                         sh 'terraform plan -var-file="variables/dev.tfvars"'
                     }
-                    input(message: "Are you sure to proceed?", ok: "Proceed")
                 }
             }
         }
@@ -49,7 +48,7 @@ pipeline{
             steps {
                 script {
                     dir('tf-aws-eks'){
-                        sh 'terraform $action -var-file="variables/dev.tfvars" -auto-approve' 
+                        sh "terraform ${params.action} -var-file=\"variables/dev.tfvars\" -auto-approve" 
                     }
                 }
             }
